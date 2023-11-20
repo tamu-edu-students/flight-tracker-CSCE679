@@ -24,9 +24,13 @@
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: 100px; /* Set a specific slider handle width */
-    height: 100px; /* Slider handle height */
-    background: url(assets/flight.png); /* Green background */
+    width: 65px; /* Set a specific slider handle width */
+    height: 65px; /* Slider handle height */
+    background: url(assets/airplane.png); /* Green background */
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+
     cursor: pointer; /* Cursor on hover */
   }
   
@@ -34,5 +38,6 @@
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
     background: url(assets/flight.png); /* Green background */
+    /* background-size: 30px 15px; */
     cursor: pointer; /* Cursor on hover */
   }
