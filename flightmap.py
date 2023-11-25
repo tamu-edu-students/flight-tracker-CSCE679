@@ -16,46 +16,45 @@ scl = ['rgb(213,62,79)', 'rgb(244,109,67)', 'rgb(253,174,97)', \
 n_colors = len(scl)
 
 #New Data Frames filtered from user input
-userin = df[(df['city1'] == 'Allentown, Pennsylvania')]
-userin2 = userin[(userin['city2'] == 'Tampa, Florida')]
+userin = df[(df['city1'] == 'Cleveland')]
+userin2 = userin[(userin['city2'] == 'Denver')]
 userin3 = userin2[(userin2['quarter'] == 1)]
+print(userin3)
 
 
+
+
+#!!!!! PROBLEM AREA !!!!!!
+
+
+fpaths = userin3[['city 1 longitude','city 2 longitude','city 1 latitude','city 2 latitude', 'fare']]
+#fpaths.columns = ['city 1 longitude','city 2 longitude']
 #MAP
+fpaths.head()
+print('!!!!!!!!!')
+print(fpaths)
 fig = go.Figure()
 
-
-#flight lines
-#var = float(userin3['fare']) / 100
-#print(var)
-opac = float(1.0)
-
-lons = []
-lats = []
-import numpy as np
-lons = np.empty(3 * len(userin3))
-lons[::3] = userin3['city 1 longitude']
-lons[1::3] = userin3['city 2 longitude']
-lons[2::3] = None
-lats = np.empty(3 * len(userin3))
-lats[::3] = userin3['city 1 latitude']
-lats[1::3] = userin3['city 2 latitude']
-lats[2::3] = None
-
-fig.add_trace(go.Scattergeo(
-    locationmode = 'USA-states',
-    lon = lons,
-    lat = lats,
-    #hoverinfo = 'text',
-    #text = userin3['fare'],
-    mode = 'lines',
-    opacity = opac,
-    line = dict(
-        width = float(userin3['fare']) / 100,
-        color = 'rgb(255, 0, 0)')
-        
+flight_paths = []
+for i in range(len(fpaths)):
+    fig.add_trace(
+        go.Scattergeo(
+            locationmode = 'USA-states',
+            lon = [fpaths['city 1 longitude'][i], fpaths['city 2 longitude'][i]],
+            lat = [fpaths['city 1 latitude'][i], fpaths['city 2 latitude'][i]],
+            mode = 'lines',
+            line = dict(width = float(fpaths['fare'][i]) / 100.0,color = 'red'),
+            opacity = 1.0,
+        )
     )
-)
+print('did it get here !!!!!!!!!!!')
+
+
+
+
+
+
+
 
 
 
