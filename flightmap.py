@@ -3,7 +3,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 from pandas import *
 from plotly import *
-
+import numpy as np
+import random
 #read file
 df = pd.read_csv("Historical Data_With_Coordinates_Final_Version.csv", encoding = "ISO-8859-1")
 df.head()
@@ -24,7 +25,7 @@ print(userin3)
 
 
 
-#!!!!! PROBLEM AREA !!!!!!
+
 
 
 fpaths = userin3[['city 1 longitude','city 2 longitude','city 1 latitude','city 2 latitude', 'fare']]
@@ -33,18 +34,27 @@ fpaths = userin3[['city 1 longitude','city 2 longitude','city 1 latitude','city 
 fpaths.head()
 print('!!!!!!!!!')
 print(fpaths)
+print('!!!!fpaths length!!!!!')
+print(len(fpaths))
 fig = go.Figure()
 
 flight_paths = []
 for i in range(len(fpaths)):
+    print('!!!!!!!!!')
+    print(fpaths['city 1 latitude'].iloc[i])
+    print('??????????')
+    print(random.choice(scl))
     fig.add_trace(
         go.Scattergeo(
             locationmode = 'USA-states',
-            lon = [fpaths['city 1 longitude'][i], fpaths['city 2 longitude'][i]],
-            lat = [fpaths['city 1 latitude'][i], fpaths['city 2 latitude'][i]],
+            lat = [fpaths['city 1 latitude'].iloc[i], fpaths['city 2 latitude'].iloc[i]],
+            lon = [fpaths['city 1 longitude'].iloc[i], fpaths['city 2 longitude'].iloc[i]],
+            hoverinfo = 'text',
+            text = fpaths['fare'],
             mode = 'lines',
-            line = dict(width = float(fpaths['fare'][i]) / 100.0,color = 'red'),
-            opacity = 1.0,
+            line = dict(width = float(fpaths['fare'].iloc[i]) / 10.0,color = random.choice(scl)),
+            opacity = 1.0 / (float(fpaths['fare'].iloc[i])/100) ,
+            
         )
     )
 print('did it get here !!!!!!!!!!!')
@@ -63,11 +73,11 @@ fig.add_trace(go.Scattergeo(
     locationmode = 'USA-states',
     lon = userin3['city 1 longitude'],
     lat = userin3['city 1 latitude'],
-    hoverinfo = 'text',
-    text = userin2['city1'],
+    #hoverinfo = 'text',
+    #text = userin2['city1'],
     mode = 'markers',
     marker = dict(
-        size = 4,
+        size = 10,
         color = 'rgb(255, 0, 0)',
         line = dict(
             width = 3,
@@ -80,11 +90,11 @@ fig.add_trace(go.Scattergeo(
     locationmode = 'USA-states',
     lon = userin3['city 2 longitude'],
     lat = userin3['city 2 latitude'],
-    hoverinfo = 'text',
-    text = userin2['city2'],
+    #hoverinfo = 'text',
+    #text = userin2['city2'],
     mode = 'markers',
     marker = dict(
-        size = 4,
+        size = 10,
         color = 'rgb(255, 0, 0)',
         line = dict(
             width = 3,
