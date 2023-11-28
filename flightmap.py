@@ -47,13 +47,31 @@ for i in range(len(fpaths)):
     fig.add_trace(
         go.Scattergeo(
             locationmode = 'USA-states',
-            lat = [fpaths['city 1 latitude'].iloc[i], fpaths['city 2 latitude'].iloc[i]],
+            lat = [fpaths['city 1 latitude'].iloc[i]+(i), fpaths['city 2 latitude'].iloc[i]+(i)],
             lon = [fpaths['city 1 longitude'].iloc[i], fpaths['city 2 longitude'].iloc[i]],
             hoverinfo = 'text',
             text = fpaths['fare'],
             mode = 'lines',
-            line = dict(width = float(fpaths['fare'].iloc[i]) / 10.0,color = random.choice(scl)),
-            opacity = 1.0 / (float(fpaths['fare'].iloc[i])/100) ,
+            line = dict(width = 3000 / float(fpaths['fare'].iloc[i])+10,color = scl[i]),
+            opacity = 1.0 #/ (float(fpaths['fare'].iloc[i])/100) ,
+            
+        )
+    )
+for i in range(len(fpaths)):
+    print('!!!!!!!!!')
+    print(fpaths['city 1 latitude'].iloc[i])
+    print('??????????')
+    print(random.choice(scl))
+    fig.add_trace(
+        go.Scattergeo(
+            locationmode = 'USA-states',
+            lat = [fpaths['city 1 latitude'].iloc[i]+(i), fpaths['city 2 latitude'].iloc[i]+(i)],
+            lon = [fpaths['city 1 longitude'].iloc[i], fpaths['city 2 longitude'].iloc[i]],
+            hoverinfo = 'text',
+            text = fpaths['fare'].iloc[i],
+            mode = 'markers',
+            line = dict(width = float(fpaths['fare'].iloc[i]) / 10.0,color = scl[i]),
+            opacity = 1.0 #/ (float(fpaths['fare'].iloc[i])/100) ,
             
         )
     )
@@ -73,8 +91,8 @@ fig.add_trace(go.Scattergeo(
     locationmode = 'USA-states',
     lon = userin3['city 1 longitude'],
     lat = userin3['city 1 latitude'],
-    #hoverinfo = 'text',
-    #text = userin2['city1'],
+    hoverinfo = 'text',
+    text = userin2['city1'],
     mode = 'markers',
     marker = dict(
         size = 10,
@@ -90,8 +108,8 @@ fig.add_trace(go.Scattergeo(
     locationmode = 'USA-states',
     lon = userin3['city 2 longitude'],
     lat = userin3['city 2 latitude'],
-    #hoverinfo = 'text',
-    #text = userin2['city2'],
+    hoverinfo = 'text',
+    text = userin2['city2'],
     mode = 'markers',
     marker = dict(
         size = 10,
