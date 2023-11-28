@@ -42,8 +42,10 @@ flight_paths = []
 for i in range(len(fpaths)):
     print('!!!!!!!!!')
     var = 10-(float(fpaths['fare'].iloc[i])/100)
+    clr = scl[i]
     if fpaths['fare'].iloc[i] == fpaths['fare'].min():
         var = 20
+        clr = 'rgb(0,255,0)'
     
     fig.add_trace(
         go.Scattergeo(
@@ -53,16 +55,15 @@ for i in range(len(fpaths)):
             hoverinfo = 'text',
             text = fpaths['fare'].iloc[i],
             mode = 'lines',
-            line = dict(width = var,color = scl[i]),
+            line = dict(width = var,color = clr),
             opacity = 1.0 #/ (float(fpaths['fare'].iloc[i])/100) ,
             
         )
     )
 for i in range(len(fpaths)):
-    print('!!!!!!!!!')
-    print(fpaths['city 1 latitude'].iloc[i])
-    print('??????????')
-    print(random.choice(scl))
+    clr = scl[i]
+    if fpaths['fare'].iloc[i] == fpaths['fare'].min():
+        clr = 'rgb(0,255,0)'
     fig.add_trace(
         go.Scattergeo(
             locationmode = 'USA-states',
@@ -73,7 +74,7 @@ for i in range(len(fpaths)):
             mode = 'markers',
             marker = dict(
                 size = 10,
-                line = dict(width = 10,color = scl[i]),
+                line = dict(width = 10,color = clr),
                 opacity = 1.0 #/ (float(fpaths['fare'].iloc[i])/100) ,
             
         )
