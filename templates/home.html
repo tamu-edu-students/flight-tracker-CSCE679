@@ -1,33 +1,252 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 <h1> <center> Welcome to Flight Tracker Project</center></h1>
 <h3><center>Project Done by Surya Krishnan, Magnus A Haarseth, Jiwon Chun and Venkatakrishnan Sutharsan</center></h3>
+
 <label for="city1"> Flying From City :  </label>
-<input type="text" id="city1" placeholder="IAH">
+<!-- <input type="text" id="city1" placeholder="City 1"> -->
+
+<select name="city1" id="city1" placeholder="City 1"> 
+  <option value="Albany, New York"> Albany, New York</option> 
+  <option value="Albuquerque, New Mexico">Albuquerque, New Mexico</option> 
+  <option value="Allentown, Pennsylvania">Allentown, Pennsylvania</option> 
+  <option value="Amarillo, Texas">Amarillo, Texas</option> 
+</select>
+  
 <br>
-<br>
+<br>  
+
 <label for="city2"> Flying  To  City :  </label>
-<input type="text" id="city2" placeholder="LAX">
+<!-- <input type="text" id="city2" placeholder="City 2"> -->
+
+<select name="city2" id="city2" placeholder="City 2"> 
+  <option value="Atlanta"> Atlanta</option> 
+  <option value="Austin">Austin</option> 
+  <option value="Boise, Idaho">Boise, Idaho</option> 
+</select>
+
 <br>
 <br>
+
+<p>Date: <input type="text" id="datepicker"></p>
+
+<label for="cabinClass"> Cabin Class :  </label>
+<select name="cabinClass" id="cabinClass" placeholder="cabinClass"> 
+  <option value="Economy"> Economy</option> 
+  <option value="Economy Premium">Economy Premium</option> 
+  <option value="Business">Business Class</option> 
+  <option value="First">First Class</option> 
+</select>
+
+<br>
+<br>
+
 <label for="budget"> Budget (total cost) : $</label>
 <input type="text" id="budget" placeholder="250">
+
 <br>
 <br>
+
 <label for="passenger_count"> Number of Passengers :  </label>
 <input type="text" id="passenger_count" placeholder="3">
-<br>
-<br>
-<div class="slidecontainer">
-    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    <p>Value: <span id="demo"></span></p>
-  </div>
 
-  <script>
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value;
+<br>
+<br>
+
+<p id="city1search"></p>
+<p id="city2search"></p>
+<p id="datesearch"></p>
+<p id="cabinclasssearch"></p>
+<p id="budgetsearch"></p>
+<p id="passengersearch"></p>
+
+
+
+<!-- <div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  <p>Value: <span id="demo"></span></p>
+</div> -->
+
+<button type="button" onclick="myFunction()">Search</button>
+
+<!-- <title>Line Chart JS</title>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+<style type="text/css">      
+  html, body, #container { 
+    width: 100%; height: 100%; margin: 0; padding: 0; 
+  } 
+</style> -->
+
+<script>
+  // var slider = document.getElementById("myRange");
+  // var output = document.getElementById("demo");
+  // output.innerHTML = slider.value;
+  
+  // slider.oninput = function() {
+  //   output.innerHTML = this.value;
+  // }
+  
+  function myFunction() {
+    var city1 = document.getElementById("city1");
+    var defaultVal = city1.defaultValue;
+    var currentVal = city1.value;
+
+    var city2 = document.getElementById("city2");
+    var defaultVal2 = city2.defaultValue;
+    var currentVal2 = city2.value;
     
-    slider.oninput = function() {
-      output.innerHTML = this.value;
+    var bugdet = document.getElementById("budget");
+    var defaultVal3 = bugdet.defaultValue;
+    var currentVal3 = bugdet.value;
+
+    var passenger = document.getElementById("passenger_count");
+    var defaultVal4 = passenger.defaultValue;
+    var currentVal4 = passenger.value;
+
+    var date = document.getElementById("datepicker");
+    var defaultVal5 = date.defaultValue;
+    var currentVal5 = date.value;
+
+    var date = document.getElementById("cabinClass");
+    var defaultVal6 = date.defaultValue;
+    var currentVal6 = date.value;
+
+
+    if (defaultVal == currentVal) {
+      
     }
-    </script>
+    else{
+      document.getElementById("city1search").innerHTML = "<br>City 1: " + currentVal;
+    }
+
+    if (defaultVal2 == currentVal2) {
+      
+    }
+    else{
+      document.getElementById("city2search").innerHTML = "<br>City 2: " + currentVal2;
+      
+    }
+
+    if (defaultVal3 == currentVal3) {
+      
+    }
+    else{
+      document.getElementById("budgetsearch").innerHTML = "<br>Budget: " + currentVal3;
+    }
+
+    if (defaultVal4 == currentVal4) {
+      
+    }
+    else{
+      document.getElementById("passengersearch").innerHTML = "<br>Number of passengers: " + currentVal4;
+    }
+
+    if (defaultVal5 == currentVal5) {
+      
+    }
+    else{
+      document.getElementById("datesearch").innerHTML = "<br>Date: " + currentVal5;
+    }
+
+    if (defaultVal6 == currentVal6) {
+      
+    }
+    else{
+      document.getElementById("cabinclasssearch").innerHTML = "<br>Cabin Class: " + currentVal6;
+    }
+  }
+  
+  //Creating calendar
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+
+  var form_data = new FormData();
+
+  formData.append("src", currentVal);
+  formData.append("dst", currentVal2);
+  formData.append("date", currentVal5);
+  formData.append("passengers", currentVal4);
+  formData.append("cabinClass", currentVal6);
+  
+
+  // for ( var key in item ) {
+  //     form_data.append(key, item[key]);
+  // }
+
+  // $.ajax({
+  //     src         : currentVal,
+  //     dst        : currentVal2,
+  //     date : currentVal5,
+  //     passengers : currentVal4,
+  //     cabinClass: currentVal6
+  // }).done(function(data){
+  //     // do stuff
+  // });
+
+  
+
+
+
+
+//DROP DOWN MENU WITH CITIES
+  // var body = d3.select("body");
+  // var data = d3.csvParse(d3.select("#csv").text());
+
+  // var menu = body.append("select");
+
+  // menu.selectAll("foo")
+  //     .data(data)
+  //     .enter()
+  //     .append("option")
+  //     .attr("value", d=>d.TPC)
+  //     .text(d=>d.subCategory);
+
+  // menu.on("change", function(){
+  //     console.log(this.value)
+  // });
+  
+  //DRAWING A LINE GRAPH
+//   anychart.onDocumentReady(function () {
+//   var data = [
+//           ["2019", 100],
+//           ["2020", 300],
+//           ["2021", 200],
+//           ["2022", 300],
+//           ["2023", 400],
+//   ];
+
+//   // create a data set
+//   var dataSet = anychart.data.set(data);
+
+// // map the data for all series
+// var firstSeriesData = dataSet.mapAs({x: 0, value: 1});
+
+
+// // create a line chart
+// var chart = anychart.line();
+
+// // create the series and name them
+// var firstSeries = chart.line(firstSeriesData);
+// firstSeries.name("city pair");
+
+// // add a legend
+// chart.legend().enabled(true);
+
+// // add a title
+// chart.title("City pair");
+
+// // specify where to display the chart
+// chart.container("container");
+
+// // draw the resulting chart
+// chart.draw();
+
+// });
+</script>
