@@ -137,5 +137,5 @@ fig.update_layout(
         countrycolor = 'rgb(204, 204, 204)',
     ),
 )
-
+fig.write_html("/Users/magnushaarseth/Documents/VIZMS/Dataviz/HW3.html")
 fig.show()
