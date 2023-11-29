@@ -14,6 +14,7 @@ scl = ['rgb(213,62,79)', 'rgb(244,109,67)', 'rgb(253,174,97)', \
     'rgb(254,224,139)', 'rgb(255,255,191)', 'rgb(230,245,152)', \
     'rgb(171,221,164)', 'rgb(102,194,165)', 'rgb(50,136,189)'
 ]
+scl.reverse()
 n_colors = len(scl)
 
 #New Data Frames filtered from user input
@@ -29,6 +30,7 @@ print(userin3)
 
 
 fpaths = userin3[['city 1 longitude','city 2 longitude','city 1 latitude','city 2 latitude', 'fare']]
+fpaths = fpaths.sort_values(by=['fare'])
 #fpaths.columns = ['city 1 longitude','city 2 longitude']
 #MAP
 fpaths.head()
@@ -49,6 +51,20 @@ for i in range(len(fpaths)):
     if fpaths['fare'].iloc[i] == fpaths['fare'].min():
         var = 20
         clr = 'rgb(0,255,0)'
+    if fpaths['fare'].iloc[i] == fpaths['fare'].max() != fpaths['fare'].iloc[i] == fpaths['fare'].min():
+        clr = 'rgb(255,0,0)'
+    #r = 0
+    #g = 255
+    #if fpaths['fare'].iloc[i] < fpaths['fare'].max() and fpaths['fare'].iloc[i] > fpaths['fare'].min():
+        #r += (255/len(fpaths))*(i)
+        #r = str(r)
+        #print('r=')
+        #print(r)
+        #g -= (255/len(fpaths))*(i)
+        #g = str(g)
+        #print('g=')
+        #print(g)
+        #clr = 'rgb(' + r + ',' + g + ',0)'
     
     fig.add_trace(
         go.Scattergeo(
@@ -67,6 +83,8 @@ for i in range(len(fpaths)):
     clr = scl[i]
     if fpaths['fare'].iloc[i] == fpaths['fare'].min():
         clr = 'rgb(0,255,0)'
+    if fpaths['fare'].iloc[i] == fpaths['fare'].max():
+        clr = 'rgb(255,0,0)'
     fig.add_trace(
         go.Scattergeo(
             locationmode = 'USA-states',
