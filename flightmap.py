@@ -42,6 +42,9 @@ flight_paths = []
 for i in range(len(fpaths)):
     print('!!!!!!!!!')
     var = 10-(float(fpaths['fare'].iloc[i])/100)
+    if fpaths['fare'].iloc[i] >= 1000:
+        var = 10-(float(fpaths['fare'].iloc[i])/1000)
+
     clr = scl[i]
     if fpaths['fare'].iloc[i] == fpaths['fare'].min():
         var = 20
@@ -80,15 +83,6 @@ for i in range(len(fpaths)):
         )
     ))
 print('did it get here !!!!!!!!!!!')
-
-
-
-
-
-
-
-
-
 
 #city one markers
 fig.add_trace(go.Scattergeo(
