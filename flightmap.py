@@ -43,7 +43,7 @@ print(userin3)
 #THIS IS WHERE TO ADD THE DATAFRAME FROM THE API
 #Replace userin3 with dataframe from api
 
-fpaths = userin3[['airline','fare']]
+fpaths = userin3[['airline','fare','airport']]
 fpaths = fpaths.sort_values(by=['fare'])
 
 
@@ -86,7 +86,7 @@ for i in range(len(fpaths)):
             lat = [lat1+(i), lat2+(i)],
             lon = [lon1, lon2],
             hoverinfo = 'text',
-            text = str(fpaths['fare'].iloc[i])+ ' , '  + fpaths['airline'],
+            text = str(fpaths['fare'].iloc[i])+ ' , '  + fpaths['airline']' , '  + fpaths['airport'],
             hoverlabel = dict(bgcolor=clr,font_color='black'),
             mode = 'lines',
             line = dict(width = var,color = clr),
@@ -107,7 +107,7 @@ for i in range(len(fpaths)):
             lat = [lat1+(i), lat2+(i)],
             lon = [lon1, lon2],
             hoverinfo = 'text',
-            text = str(fpaths['fare'].iloc[i])+ ' , ' + fpaths['airline'],
+            text = str(fpaths['fare'].iloc[i])+ ' , ' + fpaths['airline']' , '  + fpaths['airport'],
             hoverlabel = dict(bgcolor=clr,font_color='black'),
             mode = 'markers',
             marker = dict(
