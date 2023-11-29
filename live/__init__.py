@@ -128,4 +128,3 @@ def process_flight_data(src, dst, flight_data, budget):
 	
 	print(data_for_plotting)
 	return jsonify(flight_data,200)
-	
