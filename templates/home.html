@@ -6,6 +6,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
+<!-- <title>JavaScript Line Chart</title>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script>
+<style type="text/css">      
+  html, body, #container { 
+    width: 100%; height: 100%; margin: 0; padding: 0; 
+  } 
+</style> -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Data to Endpoint</title>
+
 <h1> <center> Welcome to Flight Tracker Project</center></h1>
 <h3><center>Project Done by Surya Krishnan, Magnus A Haarseth, Jiwon Chun and Venkatakrishnan Sutharsan</center></h3>
 
@@ -17,6 +29,21 @@
   <option value="Albuquerque, New Mexico">Albuquerque, New Mexico</option> 
   <option value="Allentown, Pennsylvania">Allentown, Pennsylvania</option> 
   <option value="Amarillo, Texas">Amarillo, Texas</option> 
+  <option value="Appleton, Wisconsin">Appleton, Wisconsin</option> 
+  <option value="Asheville, North Carolina">Asheville, North Carolina</option> 
+  <option value="Ashland, West Virginia">Ashland, West Virginia</option> 
+  <option value="Aspen, Colorado">Aspen, Colorado</option> 
+  <option value="Atlanta">Atlanta</option> 
+  <option value="Atlantic City, New Jersey">Atlantic City, New Jersey</option> 
+  <option value="Bangor, Maine">Bangor, Maine</option> 
+  <option value="Belleville, Illinois">Belleville, Illinois</option> 
+  <option value="Bellingham, Washington">Bellingham, Washington</option> 
+  <option value="Bend, Oregon">Bend, Oregon</option> 
+  <option value="Billings, Montana">Billings, Montana</option> 
+  <option value="Birmingham, Alabama">Birmingham, Alabama</option> 
+  <option value="Bismarck/Mandan, ND">Bismarck/Mandan, ND</option>
+  <option value="Boise, Idaho">Boise, Idaho</option>
+  <option value="Boston">Boston</option>
 </select>
   
 <br>
@@ -29,6 +56,23 @@
   <option value="Atlanta"> Atlanta</option> 
   <option value="Austin">Austin</option> 
   <option value="Boise, Idaho">Boise, Idaho</option> 
+  <option value="Boston">Boston</option> 
+  <option value="Bozeman, Montana">Bozeman, Montana</option> 
+  <option value="Buffalo, New York">Buffalo, New York</option> 
+  <option value="Charleston, South Carolina">Charleston, South Carolina</option> 
+  <option value="Charlotte, North Carolina">Charlotte, North Carolina</option> 
+  <option value="Chicago">Chicago</option> 
+  <option value="Cincinnati">Cincinnati</option> 
+  <option value="Cleveland">Cleveland</option> 
+  <option value="Colorado Springs, Colorado">Colorado Springs, Colorado</option> 
+  <option value="Columbus, Ohio">Columbus, Ohio</option> 
+  <option value="Dayton, Ohio">Dayton, Ohio</option> 
+  <option value="Denver">Denver</option> 
+  <option value="Des Moines, Iowa">Des Moines, Iowa</option> 
+  <option value="Detroit">Detroit</option> 
+  <option value="Eagle, Colorado">Eagle, Colorado</option> 
+  <option value="El Paso, Texas">El Paso, Texas</option> 
+  <option value="Fargo, North Dakota">Fargo, North Dakota</option> 
 </select>
 
 <br>
@@ -38,10 +82,10 @@
 
 <label for="cabinClass"> Cabin Class :  </label>
 <select name="cabinClass" id="cabinClass" placeholder="cabinClass"> 
-  <option value="Economy"> Economy</option> 
-  <option value="Economy Premium">Economy Premium</option> 
-  <option value="Business">Business Class</option> 
-  <option value="First">First Class</option> 
+  <option value="economy"> Economy</option> 
+  <option value="premium_economy">Economy Premium</option> 
+  <option value="business">Business Class</option> 
+  <option value="first">First Class</option> 
 </select>
 
 <br>
@@ -59,6 +103,8 @@
 <br>
 <br>
 
+<button type="button" onclick="myFunction()">Search</button>
+
 <p id="city1search"></p>
 <p id="city2search"></p>
 <p id="datesearch"></p>
@@ -66,14 +112,18 @@
 <p id="budgetsearch"></p>
 <p id="passengersearch"></p>
 
-
+<!-- <label for="dataInput">Enter Data:</label>
+<input type="text" id="dataInput">
+<button onclick="sendData()">Send Data</button> -->
 
 <!-- <div class="slidecontainer">
   <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
   <p>Value: <span id="demo"></span></p>
 </div> -->
 
-<button type="button" onclick="myFunction()">Search</button>
+
+
+<!-- <div id="container"></div> -->
 
 <!-- <title>Line Chart JS</title>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
@@ -119,14 +169,12 @@
 
 
     if (defaultVal == currentVal) {
-      
     }
     else{
       document.getElementById("city1search").innerHTML = "<br>City 1: " + currentVal;
     }
 
     if (defaultVal2 == currentVal2) {
-      
     }
     else{
       document.getElementById("city2search").innerHTML = "<br>City 2: " + currentVal2;
@@ -134,28 +182,24 @@
     }
 
     if (defaultVal3 == currentVal3) {
-      
     }
     else{
       document.getElementById("budgetsearch").innerHTML = "<br>Budget: " + currentVal3;
     }
 
     if (defaultVal4 == currentVal4) {
-      
     }
     else{
       document.getElementById("passengersearch").innerHTML = "<br>Number of passengers: " + currentVal4;
     }
 
     if (defaultVal5 == currentVal5) {
-      
     }
     else{
       document.getElementById("datesearch").innerHTML = "<br>Date: " + currentVal5;
     }
 
     if (defaultVal6 == currentVal6) {
-      
     }
     else{
       document.getElementById("cabinclasssearch").innerHTML = "<br>Cabin Class: " + currentVal6;
@@ -164,7 +208,7 @@
   
   //Creating calendar
   $( function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
 
   var form_data = new FormData();
@@ -213,14 +257,42 @@
   // });
   
   //DRAWING A LINE GRAPH
-//   anychart.onDocumentReady(function () {
-//   var data = [
-//           ["2019", 100],
-//           ["2020", 300],
-//           ["2021", 200],
-//           ["2022", 300],
-//           ["2023", 400],
-//   ];
+  // anychart.onDocumentReady(function () {
+  // function getData(){
+  //   var data = [
+  //         ["2019", 100],
+  //         ["2020", 300],
+  //         ["2021", 200],
+  //         ["2022", 300],
+  //         ["2023", 400],
+  //   ];
+  // }
+
+//   // create a data set on our data
+// var dataSet = anychart.data.set(getData());
+
+// // map data for the line chart,
+// // take x from the zero column and value from the first column
+// var seriesData = dataSet.mapAs({ x: 0, value: 1 });
+
+// // create a line chart
+// var chart = anychart.line();
+
+// // configure the chart title text settings
+// chart.title('ticket price');
+
+// // set the y axis title
+// chart.yAxis().title('price');
+
+// // create a line series with the mapped data
+// var lineChart = chart.line(seriesData);
+
+// // set the container id for the line chart
+// chart.container('container');
+
+// // draw the line chart
+// chart.draw();
+  
 
 //   // create a data set
 //   var dataSet = anychart.data.set(data);

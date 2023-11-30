@@ -5,6 +5,7 @@ from pandas import *
 from plotly import *
 import numpy as np
 import random
+import os
 #read file
 df = pd.read_csv("dataset/Historical Data_With_Coordinates_Final_Version.csv", encoding = "ISO-8859-1")
 df.head()
@@ -19,25 +20,6 @@ n_colors = len(scl)
 
 #New Data Frames filtered from user input
 
-
-
-
-# REPLACE THE CLEVELAND AND DENVER WITH WHATEVER THE USER PUTS IN
-userin = df[(df['city1'] == 'Cleveland')]
-userin2 = userin[(userin['city2'] == 'Denver')]
-
-lat1 = userin2['city 1 latitude'].iloc[1]
-lat2 = userin2['city 2 latitude'].iloc[1]
-lon1 = userin2['city 1 longitude'].iloc[1]
-lon2 = userin2['city 2 longitude'].iloc[1]
-userin3 = userin2[(userin2['quarter'] == 1)]
-
-
-print(userin3)
-
-
-
-
 #!!!!!!!!!!!!!!!!
 
 #THIS IS WHERE TO ADD THE DATAFRAME FROM THE API
@@ -49,8 +31,23 @@ print(userin3)
 
 def generate_map_html(processed_flight_data):    
     #!!!!!!!!!!!!!!!!
+
     #MAP
     fpaths = processed_flight_data
+    # REPLACE THE CLEVELAND AND DENVER WITH WHATEVER THE USER PUTS IN
+    print(fpaths.iloc[0,0])
+    print(fpaths.iloc[0,1])
+    userin = df[(df['city1'] == fpaths.iloc[0,0])]
+    userin2 = userin[(userin['city2'] == fpaths.iloc[0,1])]
+
+    lat1 = userin['city 1 latitude'].iloc[0]
+    lat2 = userin2['city 2 latitude'].iloc[0]
+    lon1 = userin['city 1 longitude'].iloc[0]
+    lon2 = userin2['city 2 longitude'].iloc[0]
+    userin3 = userin2[(userin2['quarter'] == 1)]
+
+
+    # print(userin3)
     fpaths.head()
     print('!!!!!!!!!')
     print(fpaths)
@@ -80,7 +77,7 @@ def generate_map_html(processed_flight_data):
                 lat = [lat1+(i), lat2+(i)],
                 lon = [lon1, lon2],
                 hoverinfo = 'text',
-                text = fpaths['fare'].iloc[i]+ ' , '  + fpaths['airlines'].iloc[i] + ' , '  + fpaths['city1'].iloc[i] + ' to ' + fpaths['city2'].iloc[i] + ', Time of flight:' + fpaths['time'].iloc[i],
+                text = str(fpaths['fare'].iloc[i])+ ' , '  + str(fpaths['airlines'].iloc[i]) + ' , '  + str(fpaths['city1'].iloc[i]) + ' to ' + str(fpaths['city2'].iloc[i]) + ', Time of flight:' + str(fpaths['time'].iloc[i]),
                 hoverlabel = dict(bgcolor=clr,font_color='black'),
                 mode = 'lines',
                 line = dict(width = var,color = clr),
@@ -101,7 +98,7 @@ def generate_map_html(processed_flight_data):
                 lat = [lat1+(i), lat2+(i)],
                 lon = [lon1, lon2],
                 hoverinfo = 'text',
-                text = fpaths['fare'].iloc[i]+ ' , ' + fpaths['airlines'].iloc[i] + ' , '  + fpaths['city1'].iloc[i] + ' to ' + fpaths['city2'].iloc[i] + ', Time of flight:' + fpaths['time'].iloc[i],
+                text = str(fpaths['fare'].iloc[i])+ ' , ' + str(fpaths['airlines'].iloc[i]) + ' , '  + str(fpaths['city1'].iloc[i]) + ' to ' + str(fpaths['city2'].iloc[i]) + ', Time of flight:' + str(fpaths['time'].iloc[i]),
                 hoverlabel = dict(bgcolor=clr,font_color='black'),
                 mode = 'markers',
                 marker = dict(
@@ -169,5 +166,6 @@ def generate_map_html(processed_flight_data):
             count += 1
     print('File count:', count)
     html_path = str(dir_path+str("/html"+str(count+1)))
+    print(html_path)
     fig.write_html(html_path)
     return html_path

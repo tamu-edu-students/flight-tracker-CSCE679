@@ -58,7 +58,7 @@ def getdata():
         processed_data = pd.DataFrame(processed_data, columns=['city1', 'city2', 'time', 'airlines', 'fare'])
         print(processed_data)
         html_path = flightmap.generate_map_html(processed_data)
-    return jsonify({"historical_file":image_name, "map_path":html_path}, processed_data, 200)
+    return jsonify({"historical_file":image_name, "map_path":html_path}, 200)
 
     
 if __name__ == '__main__':
