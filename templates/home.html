@@ -212,13 +212,56 @@
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
 
-  var form_data = new FormData();
+  // var form_data = new FormData();
 
-  formData.append("src", currentVal);
-  formData.append("dst", currentVal2);
-  formData.append("date", currentVal5);
-  formData.append("passengers", currentVal4);
-  formData.append("cabinClass", currentVal6);
+  // formData.append("src", currentVal);
+  // formData.append("dst", currentVal2);
+  // formData.append("date", currentVal5);
+  // formData.append("passengers", currentVal4);
+  // formData.append("cabinClass", currentVal6);
+    // function sendData() {
+      //Get the input value
+      var data1 = document.getElementById("city1").value;
+      var data2 = document.getElementById("city2").value;
+      var data3 = document.getElementById("datepicker").value;
+      var data4 = document.getElementById("passenger_count").value;
+      var data5 = document.getElementById("cabinClass").value;
+      var data6 = document.getElementById("budget").value;
+
+      // print(data1);
+
+      // var form_data = new FormData();
+
+      // formData.append("src", currentVal);
+      // formData.append("dst", currentVal2);
+      // formData.append("date", currentVal5);
+      // formData.append("passengers", currentVal4);
+      // formData.append("cabinClass", currentVal6);
+
+
+      // Define the endpoint URL
+      var endpointUrl = '/getdata';
+
+      // Make a POST request to the endpoint
+      fetch(endpointUrl, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              // You may need to include additional headers, such as authorization headers
+          },
+          body: JSON.stringify({ "city1":  data1, "city2": data2, "date" : data3, "passengers" : data4, 
+            "cabinClass" : data5, "budget" : data6})
+      })
+      .then(response => response.json())
+      .then(data => {
+          // Handle the response from the server if needed
+          console.log('Response from server:', data);
+      })
+      .catch(error => {
+          // Handle any errors that occurred during the fetch
+          console.error('Error:', error);
+      });
+  // }
   
 
   // for ( var key in item ) {
