@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, session, render_template
 import live
 import time
+import linegraph
 
 # live.get_languages()
 app = Flask(__name__)
@@ -38,6 +39,7 @@ def getdata():
     passengers = request.form['passengers']
     cabinClass = request.form['cabinClass']
     budget = request.form['budget']
+    image_name = linegraph.generate_linegraph(src, dst)
     srcSkyId, srcEntityId = live.searchAirport(src)
     time.sleep(1)
     dstSkyId, dstEntityId = live.searchAirport(dst)
@@ -45,8 +47,8 @@ def getdata():
     # return jsonify(src_data, 200)
     time.sleep(1)
     flight_data = live.searchFlights(srcSkyId, dstSkyId, srcEntityId, dstEntityId, date, passengers,cabinClass)
-    live.process_flight_data(src, dst, flight_data, budget)
-    return jsonify(flight_data)
+    processed_data = live.process_flight_data(src, dst, flight_data, budget)
+    return jsonify({"historical_file":image_name}, processed_data, 200)
 
     
 if __name__ == '__main__':
