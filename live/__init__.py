@@ -122,7 +122,7 @@ def process_flight_data(src, dst, flight_data, budget):
 			# print(flight_data['data']['itineraries'][i]['legs'][0]['durationInMinutes'])
 			# print(flight_data['data']['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['name'])
 			# print(flight_data['data']['itineraries'][i]['price']['formatted'])
-			tmp_data = [src, dst, flight_data['data']['itineraries'][i]['legs'][0]['durationInMinutes'], flight_data['data']['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['name'], flight_data['data']['itineraries'][i]['price']['formatted']]
+			tmp_data = [src, dst, flight_data['data']['itineraries'][i]['legs'][0]['durationInMinutes'], flight_data['data']['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['name'], flight_data['data']['itineraries'][i]['price']['raw']]
 			if (float(budget) >= float(flight_data['data']['itineraries'][i]['price']['raw'])):
 				data_for_plotting.append(tmp_data)
 	

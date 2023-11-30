@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request, session, render_template
 import live
 import time
 import linegraph
+import flightmap
+import pandas as pd
 
 # live.get_languages()
 app = Flask(__name__)
@@ -48,7 +50,15 @@ def getdata():
     time.sleep(1)
     flight_data = live.searchFlights(srcSkyId, dstSkyId, srcEntityId, dstEntityId, date, passengers,cabinClass)
     processed_data = live.process_flight_data(src, dst, flight_data, budget)
-    return jsonify({"historical_file":image_name}, processed_data, 200)
+    print(processed_data)
+    if len(processed_data) == 0:
+        html_path = None
+        print("empty list")
+    else:
+        processed_data = pd.DataFrame(processed_data, columns=['city1', 'city2', 'time', 'airlines', 'fare'])
+        print(processed_data)
+        html_path = flightmap.generate_map_html(processed_data)
+    return jsonify({"historical_file":image_name, "map_path":html_path}, processed_data, 200)
 
     
 if __name__ == '__main__':
