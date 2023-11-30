@@ -38,7 +38,7 @@ def generate_map_html(processed_flight_data):
     print(fpaths.iloc[0,0])
     print(fpaths.iloc[0,1])
     userin = df[(df['city1'] == fpaths.iloc[0,0])]
-    userin2 = userin[(userin['city2'] == fpaths.iloc[0,1])]
+    userin2 = df[(df['city2'] == fpaths.iloc[0,1])]
 
     lat1 = userin['city 1 latitude'].iloc[0]
     lat2 = userin2['city 2 latitude'].iloc[0]

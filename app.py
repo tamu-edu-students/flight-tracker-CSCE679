@@ -42,9 +42,9 @@ def getdata():
     cabinClass = request.form['cabinClass']
     budget = request.form['budget']
     image_name = linegraph.generate_linegraph(src, dst)
-    srcSkyId, srcEntityId = live.searchAirport(src)
+    srcSkyId, srcEntityId = live.searchAirport(src, 1)
     time.sleep(1)
-    dstSkyId, dstEntityId = live.searchAirport(dst)
+    dstSkyId, dstEntityId = live.searchAirport(dst, 2)
     # dstId, dstEntityId = live.searchAirport(dst)
     # return jsonify(src_data, 200)
     time.sleep(1)

@@ -7,6 +7,54 @@ import ast
 languages_url = "https://sky-scanner3.p.rapidapi.com/languages"
 flight_url = "https://sky-scrapper.p.rapidapi.com/api/v1/flights/getFlightDetails"
 
+city1Dict = {
+    "Albany, New York" : 'ALB',
+    "Albuquerque, New Mexico" : 'ABQ',
+    "Allentown, Pennsylvania" : 'ABE',
+    "Amarillo, Texas" : 'AMA',
+    "Appleton, Wisconsin" : 'ATW',
+    "Asheville, North Carolina" : 'AVL',
+    "Ashland, West Virginia" : 'RIC',
+    "Aspen, Colorado" : 'ASE',
+    "Atlanta" : 'ATL',
+    "Atlantic City, New Jersey" : 'ACY',
+    "Austin, Texas" : 'AUS',
+    "Bangor, Maine" : 'BGR',
+    "Belleville, Illinois" : 'BLV',
+    "Bellingham, Washington" : "BLI",
+    "Bend, Oregon" : 'RDM',
+    "Billings, Montana" : 'BIL',
+    "Birmingham, Alabama" : 'BHM',
+    "Bismarck/Mandan, ND" : 'BIS',
+    "Boise, Idaho" : 'BOI',
+    "Boston" : 'BOS'
+}
+
+city2Dict = {
+    "Atlanta" : 'ATL',
+    "Austin, Texas" : 'AUS',
+    "Boise, Idaho" : 'BOI',
+    "Boston" : 'BNH',
+    "Bozeman, Montana" : 'BZN',
+    "Buffalo, New York" : 'BUF',
+    "Charleston, South Carolina" : 'CHS',
+    "Charlotte, North Carolina" : 'CLT',
+    "Chicago" : 'MDW',
+    "Cincinnati" : 'CVG',
+    "Cleveland" : 'CLE',
+    "Colorado Springs, Colorado" : 'COS',
+    "Columbus, Ohio" : 'CMH',
+    "Dayton, Ohio" : 'DAY',
+    "Denver" : 'DEN',
+    "Des Moines, Iowa" : 'DSM',
+    "Detroit" : 'DTW',
+    "Eagle, Colorado" : 'EGE',
+    "El Paso, Texas" : 'ELP',
+    "Fargo, North Dakota" : 'FAR',
+	"Washington, DC (Metropolitan Area)":'WAS'
+}
+
+
 skyscanner_headers = {
 	"X-RapidAPI-Key": "18607e0d16msh608c9f7e2ea52cep1ea2cfjsnfbdd1a2fce9c",
 	"X-RapidAPI-Host": "sky-scanner3.p.rapidapi.com"
@@ -68,10 +116,13 @@ def getNearestAirport():
 
 # 	return response.json()
 
-def searchAirport(airport):
+def searchAirport(airport, citytype):
 	url = "https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport"
 
-	querystring = {"query":airport}
+	if citytype == 1:
+		querystring = {"query":city1Dict[airport]}
+	else:
+		querystring = {"query":city2Dict[airport]}
 
 	headers = {
 		"X-RapidAPI-Key": "18607e0d16msh608c9f7e2ea52cep1ea2cfjsnfbdd1a2fce9c",
