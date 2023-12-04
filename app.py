@@ -88,7 +88,7 @@ def getdata():
     else:
         processed_data = pd.DataFrame(processed_data, columns=['city1', 'city2', 'time', 'airlines', 'fare'])
         print(processed_data)
-        html_path = flightmap.generate_map_html(processed_data)
+        html_path = flightmap.generate_map_html(processed_data)+".html"
 
     tmp_history.append(image_name)
     tmp_history.append(html_path)
