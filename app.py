@@ -98,5 +98,25 @@ def getdata():
     return jsonify({"historical_file":image_name, "map_path":html_path}, 200)
 
     
+@app.route('/getimage')
+def get_image():
+    print(request.data)
+    return jsonify({"Data":"Passed"}, 200)
+    # if request.args.get('type') == '1':
+    #    filename = 'ok.gif'
+    # else:
+    #    filename = 'error.gif'
+    # return send_file(filename, mimetype='image/gif')
+
+@app.route('/gethtml')
+def get_image():
+    print(request.data)
+    return jsonify({"Data":"Passed"}, 200)
+    # if request.args.get('type') == '1':
+    #    filename = 'ok.gif'
+    # else:
+    #    filename = 'error.gif'
+    # return send_file(filename, mimetype='image/gif')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
