@@ -109,7 +109,7 @@ def get_image():
     # return send_file(filename, mimetype='image/gif')
 
 @app.route('/gethtml')
-def get_image():
+def get_html():
     print(request.data)
     return jsonify({"Data":"Passed"}, 200)
     # if request.args.get('type') == '1':
