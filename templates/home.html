@@ -1,8 +1,8 @@
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}">
+<!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/home.css') }}"> -->
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -205,27 +205,13 @@
     else{
       document.getElementById("cabinclasssearch").innerHTML = "<br>Cabin Class: " + currentVal6;
     }
-  }
-  
-  //Creating calendar
-  $( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-
-  // var form_data = new FormData();
-
-  // formData.append("src", currentVal);
-  // formData.append("dst", currentVal2);
-  // formData.append("date", currentVal5);
-  // formData.append("passengers", currentVal4);
-  // formData.append("cabinClass", currentVal6);
-    // function sendData() {
+       // function sendData() {
       //Get the input value
       var data1 = document.getElementById("city1").value;
       var data2 = document.getElementById("city2").value;
-      var data3 = document.getElementById("datepicker").value;
+      var data3 = document.getElementById("datesearch").value;
       var data4 = document.getElementById("passenger_count").value;
-      var data5 = document.getElementById("cabinClass").value;
+      var data5 = document.getElementById("cabinclasssearch").value;
       var data6 = document.getElementById("budget").value;
 
       // print(data1);
@@ -244,125 +230,31 @@
 
       // Make a POST request to the endpoint
       fetch(endpointUrl, {
-          method: 'GET',
+          method: 'POST',
           headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'application/json'
               // You may need to include additional headers, such as authorization headers
           },
-          body: JSON.stringify({ "city1":  data1, "city2": data2, "date" : data3, "passengers" : data4, 
-            "cabinClass" : data5, "budget" : data6})
+          body: JSON.stringify({ "src":  data1, "dst": data2, "date" : data3, "passengers" : data4, "cabinClass" : data5, "budget" : data6})
       })
       .then(response => response.json())
       .then(data => {
           // Handle the response from the server if needed
           console.log('Response from server:', data);
       })
-      .catch(error => {
-          // Handle any errors that occurred during the fetch
-          console.error('Error:', error);
-      });
+      // .catch(error => {
+      //     // Handle any errors that occurred during the fetch
+      //     console.error('Error:', error);
+      // });
   // }
+  console.log("Resulting JSON string:", JSON.stringify({ "src":  data1, "dst": data2, "date" : data3, "passengers" : data4, 
+            "cabinClass" : data5, "budget" : data6}));
+
+
+  }
   
-
-  // for ( var key in item ) {
-  //     form_data.append(key, item[key]);
-  // }
-
-  // $.ajax({
-  //     src         : currentVal,
-  //     dst        : currentVal2,
-  //     date : currentVal5,
-  //     passengers : currentVal4,
-  //     cabinClass: currentVal6
-  // }).done(function(data){
-  //     // do stuff
-  // });
-
-  
-
-
-
-
-//DROP DOWN MENU WITH CITIES
-  // var body = d3.select("body");
-  // var data = d3.csvParse(d3.select("#csv").text());
-
-  // var menu = body.append("select");
-
-  // menu.selectAll("foo")
-  //     .data(data)
-  //     .enter()
-  //     .append("option")
-  //     .attr("value", d=>d.TPC)
-  //     .text(d=>d.subCategory);
-
-  // menu.on("change", function(){
-  //     console.log(this.value)
-  // });
-  
-  //DRAWING A LINE GRAPH
-  // anychart.onDocumentReady(function () {
-  // function getData(){
-  //   var data = [
-  //         ["2019", 100],
-  //         ["2020", 300],
-  //         ["2021", 200],
-  //         ["2022", 300],
-  //         ["2023", 400],
-  //   ];
-  // }
-
-//   // create a data set on our data
-// var dataSet = anychart.data.set(getData());
-
-// // map data for the line chart,
-// // take x from the zero column and value from the first column
-// var seriesData = dataSet.mapAs({ x: 0, value: 1 });
-
-// // create a line chart
-// var chart = anychart.line();
-
-// // configure the chart title text settings
-// chart.title('ticket price');
-
-// // set the y axis title
-// chart.yAxis().title('price');
-
-// // create a line series with the mapped data
-// var lineChart = chart.line(seriesData);
-
-// // set the container id for the line chart
-// chart.container('container');
-
-// // draw the line chart
-// chart.draw();
-  
-
-//   // create a data set
-//   var dataSet = anychart.data.set(data);
-
-// // map the data for all series
-// var firstSeriesData = dataSet.mapAs({x: 0, value: 1});
-
-
-// // create a line chart
-// var chart = anychart.line();
-
-// // create the series and name them
-// var firstSeries = chart.line(firstSeriesData);
-// firstSeries.name("city pair");
-
-// // add a legend
-// chart.legend().enabled(true);
-
-// // add a title
-// chart.title("City pair");
-
-// // specify where to display the chart
-// chart.container("container");
-
-// // draw the resulting chart
-// chart.draw();
-
-// });
+  //Creating calendar
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
 </script>

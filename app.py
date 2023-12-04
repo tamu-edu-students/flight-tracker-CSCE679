@@ -50,9 +50,11 @@ def history_tofind():
 # @app.route('/getflightprice') #, methods=['POST'])
 # def getflightprice():
 #     return jsonify(live.getFlightPrice())
-@app.route('/getdata')
+@app.route('/getdata', methods=['POST'])
 def getdata():
-    src = request.form['src']
+    form_data = request.form
+    print(form_data)
+    src = request.form["src"]
     dst = request.form['dst']
     date = request.form['date']
     passengers = request.form['passengers']
