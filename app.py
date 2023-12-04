@@ -4,6 +4,7 @@ import time
 import linegraph
 import flightmap
 import pandas as pd
+import json
 
 history = []
 # live.get_languages()
@@ -53,13 +54,16 @@ def history_tofind():
 @app.route('/getdata', methods=['POST'])
 def getdata():
     form_data = request.form
-    print(form_data)
-    src = request.form["src"]
-    dst = request.form['dst']
-    date = request.form['date']
-    passengers = request.form['passengers']
-    cabinClass = request.form['cabinClass']
-    budget = request.form['budget']
+    str_got = request.data
+    print(str_got)
+    data_got = json.loads(str_got)
+    print(data_got)
+    src = data_got["src"]
+    dst = data_got['dst']
+    date = data_got['date']
+    passengers = data_got['passengers']
+    cabinClass = data_got['cabinClass']
+    budget = data_got['budget']
     tmp_history = []
     tmp_history.append(src)
     tmp_history.append(dst)
