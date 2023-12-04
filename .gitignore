@@ -4,3 +4,4 @@ images_generated/
 flightmap/__pycache__/__init__.cpython-310.pyc
 linegraph/__pycache__/__init__.cpython-310.pyc
 images_generated/*
+html_generated/*
