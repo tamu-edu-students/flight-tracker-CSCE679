@@ -157,7 +157,7 @@ def generate_map_html(processed_flight_data):
             countrycolor = 'rgb(204, 204, 204)',
         ),
     )
-    dir_path = "./html_generated"
+    dir_path = "./templates"
     count = 0
     # Iterate directory
     for path in os.listdir(dir_path):

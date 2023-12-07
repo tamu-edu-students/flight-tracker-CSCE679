@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, request, session, render_template
+from flask import Flask, jsonify, request, session, render_template, send_file
 import live
 import time
 import linegraph
 import flightmap
 import pandas as pd
 import json
+import os
 
 history = []
 # live.get_languages()
@@ -100,18 +101,22 @@ def getdata():
     
 @app.route('/getimage')
 def get_image():
-    print(request.data)
-    return jsonify({"Data":"Passed"}, 200)
+    # print(request.data)
+    abs_path = "/home/venkatakrishnan/Desktop/flight-tracker-CSCE679/images_generated"
+    print(request.form['image'])
+    image_path = request.form['image'].split('/')[-1]
+    print(image_path)
+    # return jsonify({"Data":"Passed"}, 200)
     # if request.args.get('type') == '1':
     #    filename = 'ok.gif'
     # else:
     #    filename = 'error.gif'
-    # return send_file(filename, mimetype='image/gif')
+    return send_file(os.path.join(abs_path, image_path+".png"), mimetype='image/gif')
 
 @app.route('/gethtml')
 def get_html():
-    print(request.data)
-    return jsonify({"Data":"Passed"}, 200)
+    print(request.form['html'])
+    return render_template(request.form['html'])
     # if request.args.get('type') == '1':
     #    filename = 'ok.gif'
     # else:
