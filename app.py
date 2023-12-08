@@ -96,7 +96,16 @@ def getdata():
     print(tmp_history)
     history.append(tmp_history)
     print(history)
-    return jsonify({"historical_file":image_name, "map_path":html_path}, 200)
+    # return jsonify({"historical_file":image_name, "map_path":html_path}, 200)
+    abs_path = "/home/venkatakrishnan/Desktop/flight-tracker-CSCE679/"
+    # return jsonify({"Data":"Passed"}, 200)
+    # if request.args.get('type') == '1':
+    #    filename = 'ok.gif'
+    # else:
+    #    filename = 'error.gif'
+    path = os.path.join(abs_path, image_name[2:]+".png")
+    print("Going to send html page")
+    return render_template("home2.html", data = path, src=src, dst=dst, date=date, passengers=passengers, cabinClass=cabinClass, budget=budget, live=html_path)
 
     
 @app.route('/getimage')

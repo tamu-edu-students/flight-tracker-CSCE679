@@ -21,6 +21,11 @@
 <h1> <center> Welcome to Flight Tracker Project</center></h1>
 <h3><center>Project Done by Surya Krishnan, Magnus A Haarseth, Jiwon Chun and Venkatakrishnan Sutharsan</center></h3>
 
+<div class="row" styles="display: flex;">
+<div class = "column1" style="flex: 40%;">
+
+
+
 <label for="city1"> Flying From City :  </label>
 <!-- <input type="text" id="city1" placeholder="City 1"> -->
 
@@ -116,7 +121,11 @@
 <p id="cabinclasssearch"></p>
 <p id="budgetsearch"></p>
 <p id="passengersearch"></p>
-
+</div>
+<div class = "column2" style ="flex: 60%;">
+  <img src="{{ data }}" alt="User Image">
+</div>
+</div>
 <!-- <label for="dataInput">Enter Data:</label>
 <input type="text" id="dataInput">
 <button onclick="sendData()">Send Data</button> -->
@@ -146,10 +155,11 @@
   // slider.oninput = function() {
   //   output.innerHTML = this.value;
   // }
-  
+  datepicker.value = {{date}};
+  city1.value = {{src}}
   function myFunction() {
     var city1 = document.getElementById("city1");
-    var defaultVal = city1.defaultValue;
+    var defaultVal = city1.defauldatatValue;
     var currentVal = city1.value;
 
     var city2 = document.getElementById("city2");
