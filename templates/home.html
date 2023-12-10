@@ -246,9 +246,16 @@
           // Handle the response from the server if needed
           console.log('Response from server:', data);
           const resp = data[0];
-          let img_name = resp['historical_file'];
-          console.log("Historical File name is ", img_name);
-
+          let key = resp['key'];
+          console.log("Historical File name is ", key);
+          fetch("/getimage", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+              // You may need to include additional headers, such as authorization headers
+          },
+          body: JSON.stringify({ "key":  key})
+      })
       })
   
       // .catch(error => {

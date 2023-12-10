@@ -93,6 +93,8 @@ def getdata():
 
     tmp_history.append(image_name)
     tmp_history.append(html_path)
+    key = hash(tuple([src,dst,date,passengers,budget]))
+    tmp_history.append(key)
     print(tmp_history)
     history.append(tmp_history)
     print(history)
@@ -105,22 +107,32 @@ def getdata():
     #    filename = 'error.gif'
     path = os.path.join(abs_path, image_name[2:]+".png")
     print("Going to send html page")
-    return render_template("home2.html", data = path, src=src, dst=dst, date=date, passengers=passengers, cabinClass=cabinClass, budget=budget, live=html_path)
+    return jsonify({"key":key}, 200)
 
     
-@app.route('/getimage')
+@app.route('/getimage', methods=["POST"])
 def get_image():
     # print(request.data)
-    abs_path = "/home/venkatakrishnan/Desktop/flight-tracker-CSCE679/images_generated"
-    print(request.form['image'])
-    image_path = request.form['image'].split('/')[-1]
-    print(image_path)
+    abs_path = "/home/venkatakrishnan/Desktop/flight-tracker-CSCE679/"
+    print(request.data)
+    data = json.loads(request.data)
+    key = data["key"]
+    print(len(history))
+    for each in history:
+        print(len(each))
+        if str(each[9])[:12] == str(key)[:12]:
+            return render_template("home2.html", data = os.path.join(abs_path, each[8][2:]))
+    
+    # print(key[:len(key-4)])
+    # print(image_path)
     # return jsonify({"Data":"Passed"}, 200)
     # if request.args.get('type') == '1':
     #    filename = 'ok.gif'
     # else:
     #    filename = 'error.gif'
-    return send_file(os.path.join(abs_path, image_path+".png"), mimetype='image/gif')
+    # return send_file(os.path.join(abs_path, image_path+".png"), mimetype='image/gif')
+    # return render_template()
+    return jsonify({"Return": "NULL"}, 200)
 
 @app.route('/gethtml')
 def get_html():
