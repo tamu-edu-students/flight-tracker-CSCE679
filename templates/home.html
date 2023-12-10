@@ -248,14 +248,24 @@
           const resp = data[0];
           let key = resp['key'];
           console.log("Historical File name is ", key);
-          fetch("/getimage", {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-              // You may need to include additional headers, such as authorization headers
-          },
-          body: JSON.stringify({ "key":  key})
-      })
+      //     fetch("/getimage", {
+      //     method: 'POST',
+      //     headers: {
+      //         'Content-Type': 'application/json'
+      //         // You may need to include additional headers, such as authorization headers
+      //     },
+      //     body: JSON.stringify({ "key":  key})
+      // })
+      $.ajax({
+                type: 'GET',
+                url: '/getimage',
+                data: {"key": key},
+                dataType: "json",
+                success: function (data) {
+                    // Update the content of the 'newPageContent' div with the received data
+                    $('#newPageContent').html(data);
+                }
+            });
       })
   
       // .catch(error => {

@@ -110,18 +110,27 @@ def getdata():
     return jsonify({"key":key}, 200)
 
     
-@app.route('/getimage', methods=["POST"])
+@app.route('/getimage', methods=["GET"])
 def get_image():
     # print(request.data)
     abs_path = "/home/venkatakrishnan/Desktop/flight-tracker-CSCE679/"
-    print(request.data)
-    data = json.loads(request.data)
-    key = data["key"]
+    argument = request.args
+    print(argument)
+    list_data = argument.getlist('key')
+    print(list_data)
+    key = list_data[0]
+    # key_dict = json.loads(key)
+    # print("Key:", key_dict['key'])
+    # print("Value:", data[key])
+    # data = json.loads(request.args)
     print(len(history))
     for each in history:
         print(len(each))
         if str(each[9])[:12] == str(key)[:12]:
-            return render_template("home2.html", data = os.path.join(abs_path, each[8][2:]))
+            print("Rendering!")
+            path_final = os.path.join(abs_path, each[7][2:])
+            print(path_final)
+            return render_template("home2.html", data = path_final)
     
     # print(key[:len(key-4)])
     # print(image_path)
